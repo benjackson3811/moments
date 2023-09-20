@@ -52,15 +52,15 @@ function PostCreateForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('image',imageInput.current.files[0]);
+
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("image", imageInput.current.files[0]);
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
@@ -95,11 +95,11 @@ function PostCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      {errors.content?.map((message, idx) => (
-          <Alert variant="warning" key={idx}>
-            {message}
-          </Alert>
-        ))}
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
@@ -107,7 +107,6 @@ function PostCreateForm() {
       >
         cancel
       </Button>
-
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
         create
       </Button>
@@ -129,7 +128,7 @@ function PostCreateForm() {
                   </figure>
                   <div>
                     <Form.Label
-                      className={`{$btn.Styles.Button} $btnStyles.Blue} btn`}
+                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
                       htmlFor="image-upload"
                     >
                       Change the image
@@ -160,6 +159,7 @@ function PostCreateForm() {
                 {message}
               </Alert>
             ))}
+
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
